@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>96 Well Plate (ELISA Results)</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
         .plate {
             display: grid;
             grid-template-columns: repeat(12, 50px);
@@ -26,20 +30,29 @@
         .highlight {
             border: 3px solid red;
         }
-        input[type="number"] {
-            width: 60px;
-            margin: 5px;
+        .input-container {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 400px;
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-<h2 style="text-align: center;">96 Well Plate (ELISA Results)</h2>
+<h2>96 Well Plate (ELISA Results)</h2>
 
 <!-- 表单输入 -->
-<div style="text-align: center;">
-    <label for="valuesInput">Enter Values (comma separated):</label><br>
-    <input type="text" id="valuesInput" placeholder="Enter values for 96 wells" />
+<div class="input-container">
+    <label for="valuesInput">Enter 96 Values (comma separated):</label><br>
+    <input type="text" id="valuesInput" placeholder="e.g. 0.85, 0.75, 0.65, ..." />
     <button onclick="updatePlate()">Update Plate</button>
 </div>
 
