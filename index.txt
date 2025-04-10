@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>96 Well Plate (ELISA Results)</title>
+    <style>
+        .plate {
+            display: grid;
+            grid-template-columns: repeat(12, 50px);
+            grid-template-rows: repeat(8, 50px);
+            gap: 5px;
+            margin: 20px auto;
+            width: 650px;
+            height: 450px;
+        }
+        .well {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #000;
+            width: 50px;
+            height: 50px;
+            font-size: 10px;
+        }
+        .highlight {
+            border: 3px solid red;
+        }
+        input[type="number"] {
+            width: 60px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h2 style="text-align: center;">96 Well Plate (ELISA Results)</h2>
+
+<!-- 表单输入 -->
+<div style="text-align: center;">
+    <label for="valuesInput">Enter Values (comma separated):</label><br>
+    <input type="text" id="valuesInput" placeholder="Enter values for 96 wells" />
+    <button onclick="updatePlate()">Update Plate</button>
+</div>
+
+<div class="plate" id="wellPlate"></div>
+
+<script>
+    function updatePlate() {
+        // 获取输入的值并转化为一个数组
+        const input = document.getElementById('valuesInput').value;
+        const values = input.split(',').map(Number);
+        
+        if (values.length !== 96) {
+            alert('Please enter exactly 96 values!');
+            return;
+        }
+        
+        const plate = document.getElementById('wellPlate');
+        plate.innerHTML = ''; // 清空当前的板子
+        
+        // 获取A1的值作为阈值
+        const threshold = values[0]; 
+        
+        // 创建96个孔并设置数值和样式
+        for (let i = 0; i < 96; i++) {
+            const well = document.createElement('div');
+            well.classList.add('well');
+            
+            // 设置每个孔的数值
+            well.textContent = values[i].toFixed(2);
+            
+            // 如果当前孔的数值大于A1的数值，添加红色框
+            if (values[i] > threshold) {
+                well.classList.add('highlight');
+            }
+
+            // 将孔加入到板子中
+            plate.appendChild(well);
+        }
+    }
+</script>
+
+</body>
+</html>
